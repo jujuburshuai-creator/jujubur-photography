@@ -36,8 +36,8 @@
 
   function renderLanding() {
     const scenes = [
-      {src:"/assets/video/earth-online-indonesia.mp4", title:"印度尼西亚", place:"东爪哇"},
-      {src:"/assets/video/earth-online.mp4", title:"地球 Online", place:"山河与城市"}
+      {src:"/assets/video/earth-online.mp4", title:"地球 Online", place:"山河与城市"},
+      {src:"/assets/video/earth-online-indonesia.mp4", title:"印度尼西亚", place:"东爪哇"}
     ];
     document.title = "JUJUBUR / 个人摄影集";
     app.innerHTML = `<main id="main" class="film-landing">
