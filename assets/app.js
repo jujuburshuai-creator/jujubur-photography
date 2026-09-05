@@ -36,16 +36,17 @@
 
   function renderLanding() {
     const scenes = [
-      {src:"/assets/video/earth-online.mp4", title:"地球 Online", place:"山河与城市"},
-      {src:"/assets/video/earth-online-indonesia.mp4", title:"印度尼西亚", place:"东爪哇"}
+      {src:"/assets/video/earth-online-indonesia.mp4", title:"印度尼西亚", place:"东爪哇"},
+      {src:"/assets/video/earth-online.mp4", title:"地球 Online", place:"山河与城市"}
     ];
     document.title = "JUJUBUR / 个人摄影集";
     app.innerHTML = `<main id="main" class="film-landing">
       <div class="film-media" aria-hidden="true">
-        <video class="film-video active" src="${scenes[0].src}" poster="/assets/full/p051.webp" autoplay muted playsinline preload="auto"></video>
-        <video class="film-video" src="${scenes[1].src}" poster="/assets/full/p051.webp" muted playsinline preload="auto"></video>
+        <video class="film-video active" src="${scenes[0].src}" poster="/assets/full/f005.webp" autoplay muted playsinline webkit-playsinline preload="auto"></video>
+        <video class="film-video" src="${scenes[1].src}" poster="/assets/full/f005.webp" muted playsinline webkit-playsinline preload="auto"></video>
       </div>
       <div class="film-scrim" aria-hidden="true"></div>
+      <button class="film-play" type="button" hidden><span aria-hidden="true">▶</span> 播放影像</button>
       <header class="film-header"><span>JUJUBUR / PHOTOGRAPHY</span><span>PERSONAL ARCHIVE</span></header>
       <section class="film-copy">
         <span class="film-kicker">PHOTOGRAPHY · MOTION · PLACES</span>
@@ -64,48 +65,75 @@
 
   function initFilmLanding(scenes) {
     const videos = [...document.querySelectorAll(".film-video")];
+    const playButton = document.querySelector(".film-play");
     const scene = document.querySelector(".film-scene");
     const count = document.querySelector(".film-count");
     const dots = [...document.querySelectorAll(".film-dots i")];
     let index = 0;
     let active = 0;
+    let switching = false;
     const updateStatus = () => {
       scene.textContent = `${scenes[index].title} · ${scenes[index].place}`;
       count.textContent = `${String(index + 1).padStart(2,"0")} / ${String(scenes.length).padStart(2,"0")}`;
       dots.forEach((dot, dotIndex) => dot.classList.toggle("active", dotIndex === index));
     };
-    const prepare = (video, sceneIndex) => {
-      video.src = scenes[sceneIndex].src;
-      video.load();
+    const showPlayButton = (show) => { playButton.hidden = !show; };
+    const playActive = () => {
+      const video = videos[active];
+      video.muted = true;
+      video.defaultMuted = true;
+      const attempt = video.play();
+      if (attempt) attempt.then(() => showPlayButton(false)).catch(() => showPlayButton(true));
     };
     const advance = () => {
+      if (switching) return;
+      switching = true;
       const oldVideo = videos[active];
       const nextActive = 1 - active;
       const nextVideo = videos[nextActive];
       const nextIndex = (index + 1) % scenes.length;
       const reveal = () => {
-        nextVideo.play().catch(() => {});
         nextVideo.classList.add("active");
         oldVideo.classList.remove("active");
         active = nextActive;
         index = nextIndex;
+        switching = false;
+        showPlayButton(false);
         updateStatus();
         window.setTimeout(() => {
           oldVideo.pause();
-          prepare(oldVideo, (index + 1) % scenes.length);
+          oldVideo.currentTime = 0;
         }, 1000);
       };
-      if (nextVideo.readyState >= 3) reveal();
-      else nextVideo.addEventListener("canplay", reveal, {once:true});
+      nextVideo.muted = true;
+      nextVideo.defaultMuted = true;
+      nextVideo.currentTime = 0;
+      nextVideo.addEventListener("playing", reveal, {once:true});
+      const attempt = nextVideo.play();
+      if (attempt) attempt.catch(() => {
+        switching = false;
+        showPlayButton(true);
+      });
     };
     videos.forEach((video) => {
       video.muted = true;
+      video.defaultMuted = true;
+      video.playsInline = true;
       video.addEventListener("ended", () => { if (video === videos[active]) advance(); });
     });
-    videos[0].play().catch(() => {});
+    videos[0].addEventListener("loadeddata", playActive, {once:true});
+    playButton.addEventListener("click", () => {
+      if (videos[active].ended) advance();
+      else playActive();
+    });
+    playActive();
+    window.setTimeout(() => {
+      if (videos[active].paused) showPlayButton(true);
+    }, 2400);
+    window.addEventListener("pageshow", playActive);
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) videos[active].pause();
-      else videos[active].play().catch(() => {});
+      else playActive();
     });
   }
 
