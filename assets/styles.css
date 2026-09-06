@@ -186,10 +186,10 @@ img { display: block; width: 100%; height: auto; }
   .film-copy h1 span { font-size: clamp(2.6rem,13vw,4.1rem); }
   .film-copy h1 em { margin-top: .65rem; font-size: clamp(1rem,5vw,1.45rem); letter-spacing: .16em; }
   .film-copy p { max-width: 21rem; font-size: .88rem; line-height: 1.75; }
-  .film-enter { display: inline-flex; width: auto; padding: 0.6rem 0.9rem; background: transparent; border: 1px solid rgba(255,255,255,0.4); border-radius: 40px; transition: none; }
+  .film-enter { display: inline-flex; width: auto; padding: 0.6rem 0.9rem; background: transparent; border: 1px solid rgba(255,255,255,0.4); border-radius: 0; transition: none; flex-shrink: 0; }
   .film-enter i { display: none; }
-  .film-enter:focus { background: #fff; outline: none; }
-  .film-enter:active { transform: none; }
+  .film-enter:focus { background: #fff; outline: none; transition: none; }
+  .film-enter:active { background: #fff; transform: none; transition: none; }
   .film-status { grid-template-columns: 1fr auto; gap: 1rem; }
   .film-dots { grid-column: 1 / -1; }
   .site-header { height: 60px; padding-left: 1rem; padding-right: 1rem; }
