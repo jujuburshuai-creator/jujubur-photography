@@ -186,8 +186,10 @@ img { display: block; width: 100%; height: auto; }
   .film-copy h1 span { font-size: clamp(2.6rem,13vw,4.1rem); }
   .film-copy h1 em { margin-top: .65rem; font-size: clamp(1rem,5vw,1.45rem); letter-spacing: .16em; }
   .film-copy p { max-width: 21rem; font-size: .88rem; line-height: 1.75; }
-  .film-enter { width: min(180px,70vw); }
+  .film-enter { width: auto; padding: 0.8rem 1rem; }
   .film-enter i { display: none; }
+  .film-enter { background: transparent; }
+  .film-enter:focus { background: #fff; outline: none; }
   .film-status { grid-template-columns: 1fr auto; gap: 1rem; }
   .film-dots { grid-column: 1 / -1; }
   .site-header { height: 60px; padding-left: 1rem; padding-right: 1rem; }
