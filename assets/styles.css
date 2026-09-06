@@ -39,7 +39,7 @@ img { display: block; width: 100%; height: auto; }
 .film-enter i { font-size: 1.2rem; font-style: normal; transition: transform .35s var(--ease); }
 .film-enter:hover { width: min(300px,100%); background: #ffffff; color: #080808; }
 .film-enter:hover i { transform: translate(.3rem,-.3rem); }
-.film-play { position: absolute; z-index: 3; left: 50%; top: 25%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 0.65rem; padding: 0.35rem; border: 0; background: transparent; color: rgba(255, 255, 255, 0.85); cursor: pointer; font-size: 0.72rem; letter-spacing: 0.16em; text-shadow: 0 1px 12px rgba(0, 0, 0, 0.65); }
+.film-play { position: absolute; z-index: 3; left: 50%; top: 15%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 0.65rem; padding: 0.35rem; border: 0; background: transparent; color: rgba(255, 255, 255, 0.85); cursor: pointer; font-size: 0.72rem; letter-spacing: 0.16em; text-shadow: 0 1px 12px rgba(0, 0, 0, 0.65); }
 .film-play[hidden] { display: none; }
 .film-play span { width: 2.5rem; height: 2.5rem; display: grid; place-items: center; border: 1px solid rgba(255, 255, 255, 0.65); border-radius: 50%; background: rgba(5, 8, 14, 0.25); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); font-size: 0.65rem; text-shadow: none; transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease; }
 .film-play:hover span { transform: scale(1.08); background: rgba(255, 255, 255, 0.9); color: #080808; }
@@ -232,6 +232,8 @@ img { display: block; width: 100%; height: auto; }
   .lightbox-stage { grid-template-columns: 44px 1fr 44px; }
   .lightbox-meta { justify-content: flex-start; overflow-x: auto; }
   .site-footer { min-height: 250px; flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: 1.5rem; }
+  .film-play { top: 15svh; font-size: 0.68rem; white-space: nowrap; }
+  .film-play span { width: 2.3rem; height: 2.3rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
