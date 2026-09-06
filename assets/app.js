@@ -7,6 +7,69 @@
   let currentLightboxIndex = 0;
   let lastFocused = null;
   let touchStartX = 0;
+  const designTemplates = [
+    {
+      id: "ise", number: "01", type: "PPT", pages: "16 PAGES",
+      title: "信息学院汇报模板", subtitle: "三套配色系统",
+      description: "围绕信息科学与工程学院的视觉识别展开，包含蓝白、红金、蓝金三套配色，覆盖封面、目录、图文、数据与结尾页。",
+      previews: [
+        {label:"蓝 + 白", src:"/assets/templates/previews/ise-blue-white.jpg"},
+        {label:"红 + 金", src:"/assets/templates/previews/ise-red-gold.jpg"},
+        {label:"蓝 + 金", src:"/assets/templates/previews/ise-blue-gold.jpg"}
+      ],
+      downloads: [
+        {label:"下载蓝白版", meta:"PPTX · 58 MB", href:"/assets/templates/downloads/ise-blue-white.pptx", filename:"信息科学与工程学院汇报模板_蓝+白.pptx"},
+        {label:"下载红金版", meta:"PPTX · 63 MB", href:"/assets/templates/downloads/ise-red-gold.pptx", filename:"信息科学与工程学院汇报模板_红+金.pptx"},
+        {label:"下载蓝金版", meta:"PPTX · 58 MB", href:"/assets/templates/downloads/ise-blue-gold.pptx", filename:"信息科学与工程学院汇报模板_蓝+金.pptx"}
+      ]
+    },
+    {
+      id: "seu-palette", number: "02", type: "PPT", pages: "12 PAGES",
+      title: "东大配色", subtitle: "墨绿与金色",
+      description: "提取东南大学标志性的墨绿与金色，以校园建筑、涌泉池与传统纹样作为视觉线索，适合正式汇报与学生组织展示。",
+      previews: [{label:"完整预览", src:"/assets/templates/previews/seu-palette.jpg"}],
+      downloads: [{label:"下载模板", meta:"PPTX · 52 MB", href:"/assets/templates/downloads/seu-palette.pptx", filename:"东南大学汇报模板-东大配色.pptx"}]
+    },
+    {
+      id: "student-blue", number: "03", type: "PPT", pages: "16 PAGES",
+      title: "校会蓝", subtitle: "清晰的校园表达",
+      description: "明快蓝色搭配建筑线稿与模块化版式，信息层级直观，适用于学生会述职、工作总结与校园项目汇报。",
+      previews: [{label:"完整预览", src:"/assets/templates/previews/student-union-blue.jpg"}],
+      downloads: [{label:"下载模板", meta:"PPTX · 62 MB", href:"/assets/templates/downloads/student-union-blue.pptx", filename:"东南大学汇报模板-校会蓝.pptx"}]
+    },
+    {
+      id: "deep-green", number: "04", type: "PPT", pages: "15 PAGES",
+      title: "深墨绿", subtitle: "克制、稳重、有层次",
+      description: "以深墨绿建立沉静基调，通过线描建筑、留白与金色细节强化秩序感，适合答辩、总结和正式主题分享。",
+      previews: [{label:"完整预览", src:"/assets/templates/previews/deep-green.jpg"}],
+      downloads: [{label:"下载模板", meta:"PPTX · 94 MB", href:"/assets/templates/downloads/deep-green.pptx", filename:"东南大学汇报模板-深墨绿.pptx"}]
+    },
+    {
+      id: "elegant-red", number: "05", type: "PPT", pages: "10 PAGES",
+      title: "典雅红", subtitle: "校史质感与现代排版",
+      description: "深红、鎏金与老照片共同营造典雅的历史氛围，聚焦校史、院系介绍与人文主题，同时保留现代信息排版的效率。",
+      previews: [{label:"完整预览", src:"/assets/templates/previews/elegant-red.jpg"}],
+      downloads: [
+        {label:"下载模板", meta:"PPTX · 47 MB", href:"/assets/templates/downloads/elegant-red.pptx", filename:"东南大学汇报模板-典雅红.pptx"},
+        {label:"下载 PDF 样稿", meta:"PDF · 3 MB", href:"/assets/templates/downloads/elegant-red-preview.pdf", filename:"东南大学汇报模板-典雅红.pdf"}
+      ]
+    },
+    {
+      id: "seu-word", number: "06", type: "WORD", pages: "3 PAGES",
+      title: "东南大学 Word 模板", subtitle: "从封面到正文",
+      description: "延续校会蓝视觉体系，提供封面、目录与正文页面，用于项目报告、策划书和正式材料，下载后可直接替换文字与图片。",
+      previewMode: "pages",
+      previews: [
+        {label:"封面", src:"/assets/templates/previews/word-page-1.jpg"},
+        {label:"目录", src:"/assets/templates/previews/word-page-2.jpg"},
+        {label:"正文", src:"/assets/templates/previews/word-page-3.jpg"}
+      ],
+      downloads: [
+        {label:"下载模板", meta:"DOCX · 6 MB", href:"/assets/templates/downloads/seu-word.docx", filename:"东南大学_WORD模板.docx"},
+        {label:"下载 PDF 样稿", meta:"PDF · 900 KB", href:"/assets/templates/downloads/seu-word-preview.pdf", filename:"东南大学_WORD模板.pdf"}
+      ]
+    }
+  ];
 
   const src = (photo, size = "full") => `/assets/${size}/${photo.id}.webp`;
   const alt = (photo) => `${photo.location}，${photo.title}`;
@@ -26,6 +89,7 @@
         <a href="/works/"${current === "home" ? ' aria-current="page"' : ""}>主页</a>
         <a href="/series/"${current === "series" ? ' aria-current="page"' : ""}>专题</a>
         <a href="/selected/"${current === "selected" ? ' aria-current="page"' : ""}>精选</a>
+        <a href="/design/"${current === "design" ? ' aria-current="page"' : ""}>设计</a>
       </nav>
     </header>`;
   }
@@ -36,8 +100,8 @@
 
   function renderLanding() {
     const scenes = [
-      {src:"/assets/video/earth-online.mp4", title:"地球 Online", place:"北疆风光"},
-      {src:"/assets/video/earth-online-indonesia.mp4", title:"印度尼西亚", place:"东爪哇｜巴厘岛"}
+      {src:"/assets/video/earth-online-indonesia.mp4", title:"印度尼西亚", place:"东爪哇"},
+      {src:"/assets/video/earth-online.mp4", title:"地球 Online", place:"山河与城市"}
     ];
     document.title = "JUJUBUR / 个人摄影集";
     app.innerHTML = `<main id="main" class="film-landing">
@@ -51,8 +115,11 @@
       <section class="film-copy">
         <span class="film-kicker">PHOTOGRAPHY · MOTION · PLACES</span>
         <h1><span>JUJUBUR</span><em>个人摄影集</em></h1>
-        <p>探索未知｜追逐光影。</p>
-        <a class="film-enter" href="/works/"><span>进入摄影集</span><i aria-hidden="true">↗</i></a>
+        <p>校园、城市、山河与现场，构成一组持续更新的个人影像。</p>
+        <div class="film-actions">
+          <a class="film-enter" href="/works/"><span>进入摄影集</span><i aria-hidden="true">↗</i></a>
+          <a class="film-enter film-enter-design" href="/design/"><span>进入设计作品集</span><i aria-hidden="true">↗</i></a>
+        </div>
       </section>
       <div class="film-status">
         <span class="film-scene">${scenes[0].title} · ${scenes[0].place}</span>
@@ -248,6 +315,73 @@
       </main>${footer()}`;
   }
 
+  function renderDesign() {
+    document.title = "设计作品集 — JUJUBUR";
+    app.innerHTML = `${header(false, "design")}
+      <main id="main" class="design-page">
+        <header class="design-hero">
+          <span class="design-kicker">SELECTED DESIGN ARCHIVE / 06 COLLECTIONS</span>
+          <h1><span>DESIGN</span><em>设计作品集</em></h1>
+          <p>为校园汇报与正式文档建立清晰、可靠，同时具有辨识度的视觉系统。所有作品均可预览并下载源文件。</p>
+          <a class="design-scroll" href="#collection">浏览模板 <span aria-hidden="true">↓</span></a>
+        </header>
+        <section class="design-collection" id="collection" aria-label="模板作品">
+          <div class="design-collection-head"><span>COLLECTION</span><span>点击图片可查看完整长图</span></div>
+          ${designTemplates.map((template) => `
+            <article class="design-card design-card-${template.id} reveal" data-design-card="${template.id}">
+              <div class="design-card-index"><span>${template.number}</span><small>${template.type}</small></div>
+              <button class="design-card-preview js-design-preview${template.previewMode === "pages" ? " is-document" : ""}" type="button" data-design-id="${template.id}" aria-label="展开预览：${template.title}">
+                <img src="${template.previews[0].src}" alt="${template.title}预览" loading="lazy" decoding="async">
+                <span>展开预览 <i aria-hidden="true">↗</i></span>
+              </button>
+              <div class="design-card-copy">
+                <span class="design-tag">${template.pages} · ${template.type === "WORD" ? "MICROSOFT WORD" : "POWERPOINT"}</span>
+                <h2>${template.title}</h2>
+                <strong>${template.subtitle}</strong>
+                <p>${template.description}</p>
+                ${template.previews.length > 1 && template.previewMode !== "pages" ? `<div class="design-variants" aria-label="选择预览配色">${template.previews.map((preview, index) => `<button type="button" class="js-design-variant" data-preview="${preview.src}" aria-pressed="${index === 0 ? "true" : "false"}">${preview.label}</button>`).join("")}</div>` : ""}
+                <div class="design-downloads">${template.downloads.map((download) => `<a href="${download.href}" download="${download.filename}"><span>${download.label}</span><small>${download.meta}</small><i aria-hidden="true">↓</i></a>`).join("")}</div>
+              </div>
+            </article>`).join("")}
+        </section>
+        <section class="design-note reveal"><span>USAGE</span><p>下载后可在 Microsoft PowerPoint 或 Word 中编辑。模板中的示例文字与图片均可替换，请根据实际汇报内容调整版式。</p></section>
+      </main>${footer()}`;
+  }
+
+  function ensureDesignModal() {
+    if (document.querySelector("#design-modal")) return;
+    document.body.insertAdjacentHTML("beforeend", `<div class="design-modal" id="design-modal" role="dialog" aria-modal="true" aria-label="模板完整预览" hidden>
+      <div class="design-modal-top"><span class="design-modal-title"></span><button class="design-modal-close" type="button" aria-label="关闭预览">×</button></div>
+      <div class="design-modal-stage"><div class="design-modal-images"></div></div>
+    </div>`);
+    document.querySelector(".design-modal-close").addEventListener("click", closeDesignPreview);
+  }
+
+  function openDesignPreview(button) {
+    ensureDesignModal();
+    const template = designTemplates.find((item) => item.id === button.dataset.designId);
+    if (!template) return;
+    const modal = document.querySelector("#design-modal");
+    const selectedSource = button.querySelector("img").getAttribute("src");
+    const currentPreview = template.previews.find((preview) => preview.src === selectedSource) || template.previews[0];
+    const previews = template.previewMode === "pages" ? template.previews : [currentPreview];
+    modal.querySelector(".design-modal-title").textContent = `${template.number} / ${template.title}`;
+    modal.querySelector(".design-modal-images").innerHTML = previews.map((preview, index) => `<figure><img src="${preview.src}" alt="${template.title}${preview.label}预览${template.previewMode === "pages" ? `，第 ${index + 1} 页` : ""}"><figcaption>${String(index + 1).padStart(2,"0")} / ${preview.label}</figcaption></figure>`).join("");
+    lastFocused = document.activeElement;
+    modal.hidden = false;
+    document.body.classList.add("design-modal-open");
+    modal.querySelector(".design-modal-close").focus();
+    modal.querySelector(".design-modal-stage").scrollTop = 0;
+  }
+
+  function closeDesignPreview() {
+    const modal = document.querySelector("#design-modal");
+    if (!modal || modal.hidden) return;
+    modal.hidden = true;
+    document.body.classList.remove("design-modal-open");
+    lastFocused?.focus();
+  }
+
   function renderNotFound() {
     document.title = "未找到页面 — JUJUBUR / PHOTOGRAPHY";
     app.innerHTML = `${header()}<main id="main" class="page-intro"><span class="page-kicker">404</span><h1>未找到页面</h1><p><a class="text-link" href="/">返回主页 →</a></p></main>${footer()}`;
@@ -314,7 +448,20 @@
       if (entry.isIntersecting) { entry.target.classList.add("visible"); observer.unobserve(entry.target); }
     }), {threshold:.08});
     document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
+    document.querySelectorAll(".js-design-preview").forEach((button) => button.addEventListener("click", () => openDesignPreview(button)));
+    document.querySelectorAll(".js-design-variant").forEach((button) => button.addEventListener("click", () => {
+      const card = button.closest(".design-card");
+      card.querySelector(".design-card-preview img").src = button.dataset.preview;
+      card.querySelector(".design-card-preview img").alt = `${card.querySelector("h2").textContent}${button.textContent}预览`;
+      card.querySelectorAll(".js-design-variant").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+    }));
     document.addEventListener("keydown", (event) => {
+      const designModal = document.querySelector("#design-modal");
+      if (designModal && !designModal.hidden) {
+        if (event.key === "Escape") closeDesignPreview();
+        if (event.key === "Tab") { event.preventDefault(); designModal.querySelector(".design-modal-close").focus(); }
+        return;
+      }
       if (!document.querySelector("#lightbox.open")) return;
       if (event.key === "Escape") closeLightbox();
       if (event.key === "ArrowLeft") moveLightbox(-1);
@@ -331,7 +478,7 @@
   function bindPageTransitions() {
     window.addEventListener("pageshow", () => document.body.classList.remove("page-leaving"));
     document.querySelectorAll('a[href^="/"]').forEach((link) => link.addEventListener("click", (event) => {
-      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      if (link.hasAttribute("download") || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       const target = new URL(link.href, location.href);
       if (target.origin !== location.origin || (target.pathname === location.pathname && target.hash === location.hash)) return;
       if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -345,6 +492,7 @@
   if (path === "/") renderLanding();
   else if (path === "/works") renderHome();
   else if (path === "/selected") renderSelected();
+  else if (path === "/design") renderDesign();
   else if (path === "/series") renderSeriesIndex();
   else if (path.startsWith("/series/")) {
     const slug = path.split("/")[2];
