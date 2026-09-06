@@ -51,7 +51,7 @@
       <section class="film-copy">
         <span class="film-kicker">PHOTOGRAPHY · MOTION · PLACES</span>
         <h1><span>JUJUBUR</span><em>个人摄影集</em></h1>
-        <p>校园、城市、山河，这是一组持续更新的个人影像作品集。</p>
+        <p>探索未知｜追逐光影。</p>
         <a class="film-enter" href="/works/"><span>进入摄影集</span><i aria-hidden="true">↗</i></a>
       </section>
       <div class="film-status">
