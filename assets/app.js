@@ -100,8 +100,8 @@
 
   function renderLanding() {
     const scenes = [
-      {src:"/assets/video/earth-online-indonesia.mp4", title:"印度尼西亚", place:"东爪哇"},
-      {src:"/assets/video/earth-online.mp4", title:"地球 Online", place:"山河与城市"}
+      {src:"/assets/video/earth-online-indonesia.mp4", title:"地球 Online 印度尼西亚", place:"东爪哇｜巴厘岛"},
+      {src:"/assets/video/earth-online.mp4", title:"地球 Online 新疆风光", place:"阿勒泰｜赛里木｜昭苏"}
     ];
     document.title = "JUJUBUR / 个人摄影集";
     app.innerHTML = `<main id="main" class="film-landing">
@@ -114,10 +114,10 @@
       <header class="film-header"><span>JUJUBUR / PHOTOGRAPHY</span><span>PERSONAL ARCHIVE</span></header>
       <section class="film-copy">
         <span class="film-kicker">PHOTOGRAPHY · MOTION · PLACES</span>
-        <h1><span>JUJUBUR</span><em>个人摄影集</em></h1>
-        <p>校园、城市、山河与现场，构成一组持续更新的个人影像。</p>
+        <h1><span>JUJUBUR</span><em>个人作品集</em></h1>
+        <p>探寻未知｜追逐光影</p>
         <div class="film-actions">
-          <a class="film-enter" href="/works/"><span>进入摄影集</span><i aria-hidden="true">↗</i></a>
+          <a class="film-enter" href="/works/"><span>进入摄影作品集</span><i aria-hidden="true">↗</i></a>
           <a class="film-enter film-enter-design" href="/design/"><span>进入设计作品集</span><i aria-hidden="true">↗</i></a>
         </div>
       </section>
