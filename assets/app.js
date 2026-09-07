@@ -110,7 +110,7 @@
         <video class="film-video" src="${scenes[1].src}" poster="/assets/full/f005.webp" muted playsinline webkit-playsinline preload="auto"></video>
       </div>
       <div class="film-scrim" aria-hidden="true"></div>
-      <button class="film-play" type="button" hidden><span aria-hidden="true">▶</span> 播放影像</button>
+      <button class="film-play" type="button" hidden>播放影像</button>
       <header class="film-header"><span>JUJUBUR / PHOTOGRAPHY</span><span>PERSONAL ARCHIVE</span></header>
       <section class="film-copy">
         <span class="film-kicker">PHOTOGRAPHY · MOTION · PLACES</span>
