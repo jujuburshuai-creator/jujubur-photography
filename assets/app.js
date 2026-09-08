@@ -114,8 +114,8 @@
       <header class="film-header"><span>JUJUBUR / PHOTOGRAPHY</span><span>PERSONAL ARCHIVE</span></header>
       <section class="film-copy">
         <span class="film-kicker">PHOTOGRAPHY · MOTION · PLACES</span>
-        <h1><span>JUJUBUR</span><em>个人作品集</em></h1>
-        <p>探寻未知｜追逐光影</p>
+        <h1><span>帅 杰 博</span><em>个人作品集</em></h1>
+        <p>东南大学｜信息科学与工程学院</p>
         <div class="film-actions">
           <a class="film-enter" href="/works/"><span>进入摄影作品集</span><i aria-hidden="true">↗</i></a>
           <a class="film-enter film-enter-design" href="/design/"><span>进入设计作品集</span><i aria-hidden="true">↗</i></a>
