@@ -119,6 +119,21 @@ img { display: block; width: 100%; height: auto; }
 .series-row .arrow { font-size: 1.4rem; transition: transform .35s var(--ease); }
 .series-row:hover .arrow { transform: translateX(.45rem); }
 .series-row:hover .series-preview img { transform: scale(1.015); opacity: .58; }
+.dji-feature { padding: clamp(1.25rem,4vw,4.5rem); background: #080a0d; }
+.dji-feature-link { position: relative; min-height: min(78vh,880px); display: block; overflow: hidden; isolation: isolate; border: 1px solid rgba(255,255,255,.18); }
+.dji-feature-media,.dji-feature-media picture,.dji-feature-scrim { position: absolute; inset: 0; width: 100%; height: 100%; }
+.dji-feature-media { z-index: -2; }
+.dji-feature-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s cubic-bezier(.18,.7,.18,1),filter .7s ease; }
+.dji-feature-scrim { z-index: -1; background: linear-gradient(90deg,rgba(3,6,10,.84),rgba(3,6,10,.2) 68%),linear-gradient(0deg,rgba(2,4,7,.76),transparent 62%); }
+.dji-feature-top { position: absolute; inset: 2rem 2.2rem auto; display: flex; justify-content: space-between; color: rgba(255,255,255,.68); font-size: .7rem; letter-spacing: .18em; }
+.dji-feature-copy { position: absolute; left: clamp(1.5rem,5vw,5rem); bottom: clamp(2rem,7vw,6.5rem); }
+.dji-feature-kicker { color: #c7ff39; font-size: .78rem; letter-spacing: .2em; }
+.dji-feature-copy h2 { margin: .55rem 0 1rem; font-family: "Songti SC",serif; font-size: clamp(4rem,10vw,11rem); line-height: .82; font-weight: 400; letter-spacing: -.06em; }
+.dji-feature-copy p { max-width: 33rem; margin: 0; color: rgba(255,255,255,.74); font-size: clamp(.95rem,1.4vw,1.2rem); }
+.dji-feature-enter { position: absolute; right: clamp(1.5rem,4vw,4rem); bottom: clamp(2rem,4vw,4rem); width: 9rem; height: 9rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .6rem; border: 1px solid rgba(255,255,255,.58); border-radius: 50%; font-size: .78rem; letter-spacing: .12em; transition: color .45s ease,background .45s ease,transform .45s var(--ease); }
+.dji-feature-enter i { font-size: 1.35rem; font-style: normal; }
+.dji-feature-link:hover .dji-feature-media img,.dji-feature-link:focus-visible .dji-feature-media img { transform: scale(1.045); filter: saturate(1.08); }
+.dji-feature-link:hover .dji-feature-enter,.dji-feature-link:focus-visible .dji-feature-enter { background: #fff; color: #090b0e; transform: rotate(5deg); }
 .home-selected { min-height: 88vh; display: grid; grid-template-columns: .9fr 1.1fr; gap: 8vw; align-items: center; padding: clamp(6rem,10vw,11rem) clamp(1.25rem,7vw,9rem); }
 .home-selected-image { transform: translateY(5%); }
 .home-selected-copy .eyebrow { font-size: .72rem; letter-spacing: .16em; color: var(--muted); }
@@ -159,6 +174,41 @@ img { display: block; width: 100%; height: auto; }
 .selected-item,.selected-item:nth-child(n) { width: 100%; margin: 0 0 clamp(1.5rem,3vw,2.5rem); break-inside: avoid; }
 .selected-item .caption { opacity: 0; transform: translateY(.35rem); transition: opacity .3s ease,transform .3s ease; }
 .selected-item:hover .caption,.selected-item:focus-within .caption { opacity: 1; transform: none; }
+
+.dji-page { background: #07090c; color: #f3f5f3; }
+.dji-hero { position: relative; min-height: 100svh; display: grid; align-items: end; overflow: hidden; isolation: isolate; }
+.dji-hero-media,.dji-hero-media picture,.dji-hero-scrim { position: absolute; inset: 0; width: 100%; height: 100%; }
+.dji-hero-media { z-index: -3; animation: dji-drift 18s ease-out both; }
+.dji-hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.dji-hero-scrim { z-index: -2; background: linear-gradient(90deg,rgba(2,5,9,.79),rgba(2,5,9,.12) 68%),linear-gradient(0deg,rgba(2,4,8,.92),transparent 55%,rgba(2,4,8,.38)); }
+@keyframes dji-drift { from { transform: scale(1.08); } to { transform: scale(1); } }
+.dji-horizon { position: absolute; z-index: 1; top: 50%; left: clamp(1.25rem,4vw,4.5rem); right: clamp(1.25rem,4vw,4.5rem); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; color: rgba(255,255,255,.48); font-size: .62rem; letter-spacing: .2em; pointer-events: none; }
+.dji-horizon i { height: 1px; background: rgba(255,255,255,.22); transform: scaleX(0); animation: dji-line 1.6s .5s var(--ease) forwards; }
+@keyframes dji-line { to { transform: scaleX(1); } }
+.dji-hero-copy { position: relative; z-index: 2; width: min(950px,calc(100% - 2.5rem)); margin: 0 0 clamp(5rem,10vh,8rem) clamp(1.25rem,7vw,8rem); }
+.dji-kicker { display: block; margin-bottom: 1.5rem; color: #c7ff39; font-size: .72rem; letter-spacing: .2em; }
+.dji-hero h1 { margin: 0; display: flex; flex-direction: column; font-family: "Songti SC",serif; font-size: clamp(4.4rem,11vw,12rem); line-height: .78; font-weight: 400; letter-spacing: -.07em; }
+.dji-hero h1 small { margin-bottom: .7rem; font-family: "Helvetica Neue","PingFang SC",sans-serif; font-size: clamp(.9rem,1.6vw,1.45rem); font-weight: 400; letter-spacing: .35em; }
+.dji-hero-copy p { max-width: 36rem; margin: 2.2rem 0 0; color: rgba(255,255,255,.72); font-size: clamp(1rem,1.45vw,1.2rem); line-height: 1.8; }
+.dji-descend { position: absolute; z-index: 3; right: clamp(1.25rem,4vw,4.5rem); bottom: 3rem; display: flex; align-items: center; gap: 1.2rem; color: rgba(255,255,255,.78); font-size: .72rem; letter-spacing: .15em; }
+.dji-descend i { width: 3rem; height: 3rem; display: grid; place-items: center; border: 1px solid rgba(255,255,255,.5); border-radius: 50%; color: #c7ff39; font-style: normal; animation: dji-float 1.8s ease-in-out infinite; }
+@keyframes dji-float { 50% { transform: translateY(.4rem); } }
+.dji-gallery-wrap { width: min(1560px,100%); margin: auto; padding: clamp(6rem,10vw,11rem) clamp(1.25rem,4vw,4.5rem) clamp(7rem,11vw,12rem); }
+.dji-gallery-head { display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: end; margin-bottom: clamp(3.5rem,7vw,7rem); padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,.2); }
+.dji-gallery-head span { color: #c7ff39; font-size: .68rem; letter-spacing: .18em; }
+.dji-gallery-head h2 { margin: .8rem 0 0; font-family: "Songti SC",serif; font-size: clamp(2.8rem,6vw,6.5rem); line-height: 1; font-weight: 400; }
+.dji-gallery-head p { margin: 0; color: #858a8c; text-align: right; font-size: .8rem; line-height: 1.9; letter-spacing: .05em; }
+.dji-waterfall { columns: 3; column-gap: clamp(1rem,2vw,2rem); }
+.dji-shot { margin: 0 0 clamp(1.5rem,2.8vw,2.8rem); break-inside: avoid; }
+.dji-shot .photo-button { position: relative; overflow: hidden; }
+.dji-shot img { transition: transform .85s var(--ease),filter .55s ease; }
+.dji-shot-hover { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: space-between; padding: 1.1rem; background: linear-gradient(transparent 42%,rgba(2,5,8,.76)); opacity: 0; transition: opacity .4s ease; }
+.dji-shot-hover i,.dji-shot-hover b { font-style: normal; font-size: .68rem; font-weight: 400; letter-spacing: .13em; }
+.dji-shot-hover i { color: #c7ff39; }
+.dji-shot:hover img,.dji-shot:focus-within img { transform: scale(1.035); filter: saturate(1.08); }
+.dji-shot:hover .dji-shot-hover,.dji-shot:focus-within .dji-shot-hover { opacity: 1; }
+.dji-shot figcaption { display: flex; justify-content: space-between; gap: 1rem; padding-top: .7rem; border-top: 1px solid rgba(255,255,255,.18); color: #8a8e90; font-size: .7rem; letter-spacing: .06em; }
+.dji-shot figcaption span:first-child { color: #d9dcda; }
 
 .design-page { --design-accent: #d8ff38; --design-paper: #0b0b0b; background: var(--design-paper); color: #f0f0ec; }
 .design-hero { position: relative; min-height: calc(100svh - 82px); padding: clamp(4rem,8vw,8rem) clamp(1.25rem,7vw,8rem) 3rem; display: grid; grid-template-columns: 1fr minmax(240px,.42fr); grid-template-rows: auto 1fr auto; gap: 2rem 4rem; background: #111; color: #f5f5ef; overflow: hidden; isolation: isolate; }
@@ -235,8 +285,18 @@ body.design-modal-open { overflow: hidden; }
 .lightbox-close,.lightbox-nav { border: 0; background: transparent; color: inherit; cursor: pointer; }
 .lightbox-close { padding: .8rem; font-size: 1.6rem; line-height: 1; }
 .lightbox-stage { min-height: 0; display: grid; grid-template-columns: 60px 1fr 60px; align-items: center; }
-.lightbox-stage img { width: auto; max-width: 100%; height: auto; max-height: calc(100vh - 160px); margin: auto; object-fit: contain; }
-.lightbox-nav { height: 100%; font-size: 1.6rem; }
+.lightbox-visual { position: relative; width: 100%; height: 100%; min-height: 0; display: grid; place-items: center; overflow: hidden; isolation: isolate; }
+.lightbox-image { grid-area: 1 / 1; width: auto; max-width: 100%; height: auto; max-height: calc(100vh - 160px); margin: auto; object-fit: contain; will-change: transform,opacity,filter,clip-path; }
+.lightbox-image.current { z-index: 1; }
+.lightbox-image.incoming { z-index: 2; opacity: 0; }
+.lightbox-scan { position: absolute; z-index: 4; inset: 0 auto 0 50%; width: 1px; background: linear-gradient(transparent,rgba(199,255,57,.85) 25%,#fff 50%,rgba(199,255,57,.85) 75%,transparent); box-shadow: 0 0 32px rgba(199,255,57,.7); opacity: 0; pointer-events: none; }
+.lightbox-visual.is-switching .lightbox-scan { animation: lightbox-scan-next .88s cubic-bezier(.5,0,.2,1); }
+.lightbox-visual.is-switching.to-prev .lightbox-scan { animation-name: lightbox-scan-prev; }
+@keyframes lightbox-scan-next { 0% { left: 12%; opacity: 0; } 18%,75% { opacity: 1; } 100% { left: 88%; opacity: 0; } }
+@keyframes lightbox-scan-prev { 0% { left: 88%; opacity: 0; } 18%,75% { opacity: 1; } 100% { left: 12%; opacity: 0; } }
+.lightbox-nav { height: 100%; font-size: 1.6rem; overflow: hidden; }
+.lightbox-nav span { display: block; transition: transform .35s var(--ease); }
+.lightbox-nav:hover span,.lightbox-nav:focus-visible span { transform: scale(1.3); color: #c7ff39; }
 .lightbox-meta { display: flex; align-items: center; justify-content: center; gap: clamp(1rem,4vw,4rem); padding: 0 1rem; font-size: .76rem; letter-spacing: .06em; }
 .lightbox-meta span { display: flex; gap: .6rem; align-items: baseline; }
 .lightbox-meta b { color: #777; font-size: .62rem; font-weight: 400; letter-spacing: .14em; }
@@ -285,6 +345,13 @@ body.design-modal-open { overflow: hidden; }
   .series-row { min-height: 180px; }
   .series-row-content { grid-template-columns: 2.2rem 1fr auto; gap: 1rem; padding: 1.4rem; }
   .series-row p { display: none; }
+  .dji-feature-link { min-height: 72svh; }
+  .dji-feature-top { inset: 1rem 1rem auto; }
+  .dji-feature-top span:last-child { display: none; }
+  .dji-feature-copy { left: 1rem; right: 1rem; bottom: 6.5rem; }
+  .dji-feature-copy h2 { font-size: clamp(3.7rem,19vw,6rem); }
+  .dji-feature-copy p { font-size: .86rem; }
+  .dji-feature-enter { left: 1rem; right: auto; bottom: 1.1rem; width: auto; height: auto; flex-direction: row; justify-content: flex-start; padding: .7rem 1rem; border-radius: 99px; }
   .home-selected { grid-template-columns: 1fr; gap: 4rem; }
   .home-selected-image { width: 82%; margin-left: auto; order: 2; }
   .page-intro h1 { font-size: clamp(3.2rem,17vw,6.5rem); }
@@ -295,6 +362,15 @@ body.design-modal-open { overflow: hidden; }
   .series-gallery,.selected-grid { column-gap: 1rem; }
   .series-nav a { min-height: 140px; }
   .selected-item .caption { opacity: 1; transform: none; }
+  .dji-hero-copy { margin-left: 1rem; margin-bottom: 7rem; }
+  .dji-hero h1 { font-size: clamp(3.8rem,20vw,6.4rem); }
+  .dji-hero-copy p { max-width: 21rem; font-size: .92rem; line-height: 1.7; }
+  .dji-horizon { top: 35%; left: 1rem; right: 1rem; }
+  .dji-descend { left: 1rem; right: auto; bottom: 2rem; }
+  .dji-gallery-head { grid-template-columns: 1fr; gap: 1.3rem; }
+  .dji-gallery-head p { text-align: left; }
+  .dji-waterfall { columns: 1; }
+  .dji-shot-hover { opacity: 1; }
   .design-hero { min-height: calc(100svh - 60px); grid-template-columns: 1fr; grid-template-rows: auto 1fr auto auto; gap: 1.5rem; }
   .design-hero h1 span { font-size: clamp(4rem,24vw,8rem); }
   .design-hero p { margin: 0; }
@@ -313,6 +389,7 @@ body.design-modal-open { overflow: hidden; }
   .design-modal-top { padding-left: 1rem; padding-right: 1rem; }
   .design-modal-title { max-width: calc(100% - 62px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .lightbox-stage { grid-template-columns: 44px 1fr 44px; }
+  .lightbox-image { max-height: calc(100vh - 176px); }
   .lightbox-meta { justify-content: flex-start; overflow-x: auto; }
   .site-footer { min-height: 250px; flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: 1.5rem; }
 }
@@ -324,6 +401,9 @@ body.design-modal-open { overflow: hidden; }
   .film-video { transition: opacity .15s linear; transform: none; }
   .design-scroll span { animation: none; }
   .design-card-preview img { transition: none; }
+  .dji-hero-media,.dji-horizon i,.dji-descend i { animation: none; }
+  .dji-feature-media img,.dji-shot img { transition: none; }
+  .lightbox-visual.is-switching .lightbox-scan { animation: none; }
   #app { animation: none; }
   body.page-leaving #app { opacity: 1; transform: none; transition: none; }
 }

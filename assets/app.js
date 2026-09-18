@@ -7,6 +7,7 @@
   let currentLightboxIndex = 0;
   let lastFocused = null;
   let touchStartX = 0;
+  let lightboxAnimating = false;
   const designTemplates = [
     {
       id: "ise", number: "01", type: "PPT", pages: "16 PAGES",
@@ -70,6 +71,7 @@
       ]
     }
   ];
+  const djiPhotoIds = ["f001","p008","p036","p017","p011","p021","f009","p028","p012","p029","p050"];
 
   const src = (photo, size = "full") => `/assets/${size}/${photo.id}.webp`;
   const alt = (photo) => `${photo.location}，${photo.title}`;
@@ -251,12 +253,25 @@
         </section>
       </main>
       <section class="home-series" aria-labelledby="series-title">
-        <div class="section-heading"><h2 id="series-title">Series</h2><span>专题 / 05</span></div>
+        <div class="section-heading"><h2 id="series-title">Series</h2><span>专题 / 06</span></div>
         <div class="series-list">${data.series.map((series) => `
           <a class="series-row" href="/series/${series.slug}/">
             <div class="series-preview">${picture(byId[series.cover])}</div>
             <div class="series-row-content"><span class="number">${series.number}</span><h3>${series.title}</h3><p>${series.intro}</p><span class="arrow" aria-hidden="true">→</span></div>
           </a>`).join("")}</div>
+      </section>
+      <section class="dji-feature reveal" aria-labelledby="dji-feature-title">
+        <a class="dji-feature-link" href="/dji/">
+          <div class="dji-feature-media">${picture(byId.f001)}</div>
+          <div class="dji-feature-scrim" aria-hidden="true"></div>
+          <div class="dji-feature-top"><span>06 / AERIAL SERIES</span><span>DJI · SKY CITY</span></div>
+          <div class="dji-feature-copy">
+            <span class="dji-feature-kicker">大疆专题</span>
+            <h2 id="dji-feature-title">天空之城</h2>
+            <p>越过地平线，从另一种高度观看城市、山河与季节。</p>
+          </div>
+          <span class="dji-feature-enter">进入专题 <i aria-hidden="true">↗</i></span>
+        </a>
       </section>
       <section class="home-selected reveal">
         <div class="home-selected-image">${picture(byId.p041)}</div>
@@ -312,6 +327,40 @@
         <header class="page-intro selected-head"><span class="page-kicker">A CURATED EDIT / ${String(selected.length).padStart(2,"0")}</span><h1>Selected<br>Works</h1></header>
         <div class="selected-grid">${selected.map((photo) => `
           <figure class="selected-item reveal"><button class="photo-button js-photo" data-photo-id="${photo.id}" aria-label="查看大图：${alt(photo)}">${picture(photo)}</button>${caption(photo)}</figure>`).join("")}</div>
+      </main>${footer()}`;
+  }
+
+  function renderDji() {
+    const items = djiPhotoIds.map((id) => byId[id]).filter(Boolean);
+    const cover = items[0];
+    document.title = "大疆专题 · 天空之城 — JUJUBUR";
+    app.innerHTML = `${header(true, "series")}
+      <main id="main" class="dji-page">
+        <header class="dji-hero">
+          <div class="dji-hero-media">${picture(cover, true)}</div>
+          <div class="dji-hero-scrim" aria-hidden="true"></div>
+          <div class="dji-horizon" aria-hidden="true"><i></i><span>ALTITUDE / 120 M</span><i></i></div>
+          <div class="dji-hero-copy">
+            <span class="dji-kicker">DJI AERIAL ARCHIVE · ${String(items.length).padStart(2,"0")} FRAMES</span>
+            <h1><small>大疆专题</small>天空之城</h1>
+            <p>让相机升入天空，地貌、建筑与道路随高度重新排列。点击任一画面，进入全屏飞行视角。</p>
+          </div>
+          <a class="dji-descend" href="#aerial-gallery"><span>向下探索</span><i aria-hidden="true">↓</i></a>
+        </header>
+        <section class="dji-gallery-wrap" id="aerial-gallery" aria-labelledby="aerial-gallery-title">
+          <header class="dji-gallery-head">
+            <div><span>FLIGHT LOG / 001—${String(items.length).padStart(3,"0")}</span><h2 id="aerial-gallery-title">航拍作品</h2></div>
+            <p>俯瞰城市肌理与自然边界<br>点击图片可全屏浏览 · 支持方向键与滑动切换</p>
+          </header>
+          <div class="dji-waterfall">${items.map((photo, index) => `
+            <figure class="dji-shot reveal">
+              <button class="photo-button js-photo" data-photo-id="${photo.id}" aria-label="查看航拍作品：${alt(photo)}">
+                ${picture(photo)}
+                <span class="dji-shot-hover"><i>${String(index + 1).padStart(2,"0")}</i><b>展开视野 ↗</b></span>
+              </button>
+              <figcaption><span>${photo.title}</span><span>${photo.location}</span></figcaption>
+            </figure>`).join("")}</div>
+        </section>
       </main>${footer()}`;
   }
 
@@ -391,7 +440,7 @@
     if (document.querySelector("#lightbox")) return;
     document.body.insertAdjacentHTML("beforeend", `<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="照片查看器">
       <div class="lightbox-top"><span class="lightbox-count"></span><button class="lightbox-close" type="button" aria-label="关闭">×</button></div>
-      <div class="lightbox-stage"><button class="lightbox-nav prev" type="button" aria-label="上一张">←</button><img alt=""><button class="lightbox-nav next" type="button" aria-label="下一张">→</button></div>
+      <div class="lightbox-stage"><button class="lightbox-nav prev" type="button" aria-label="上一张"><span>←</span></button><div class="lightbox-visual"><img class="lightbox-image current" alt=""><img class="lightbox-image incoming" alt="" aria-hidden="true"><i class="lightbox-scan" aria-hidden="true"></i></div><button class="lightbox-nav next" type="button" aria-label="下一张"><span>→</span></button></div>
       <div class="lightbox-meta"><span><b>作品</b><i class="lightbox-title"></i></span><span><b>拍摄地</b><i class="lightbox-location"></i></span><span><b>原始尺寸</b><i class="lightbox-size"></i></span></div>
     </div>`);
     const lightbox = document.querySelector("#lightbox");
@@ -421,7 +470,7 @@
     const lightbox = document.querySelector("#lightbox");
     const photo = byId[currentLightboxIds[currentLightboxIndex]];
     if (!photo) return;
-    const image = lightbox.querySelector("img");
+    const image = lightbox.querySelector(".lightbox-image.current");
     image.src = src(photo);
     image.alt = alt(photo);
     lightbox.querySelector(".lightbox-count").textContent = `${String(currentLightboxIndex + 1).padStart(2,"0")} / ${String(currentLightboxIds.length).padStart(2,"0")}`;
@@ -431,11 +480,55 @@
   }
 
   function moveLightbox(direction) {
-    currentLightboxIndex = (currentLightboxIndex + direction + currentLightboxIds.length) % currentLightboxIds.length;
-    updateLightbox();
+    if (lightboxAnimating || currentLightboxIds.length < 2) return;
+    const nextIndex = (currentLightboxIndex + direction + currentLightboxIds.length) % currentLightboxIds.length;
+    const nextPhoto = byId[currentLightboxIds[nextIndex]];
+    const lightbox = document.querySelector("#lightbox");
+    const current = lightbox.querySelector(".lightbox-image.current");
+    const incoming = lightbox.querySelector(".lightbox-image.incoming");
+    const visual = lightbox.querySelector(".lightbox-visual");
+    if (!nextPhoto || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      currentLightboxIndex = nextIndex;
+      updateLightbox();
+      return;
+    }
+    lightboxAnimating = true;
+    incoming.src = src(nextPhoto);
+    incoming.alt = alt(nextPhoto);
+    visual.classList.remove("to-next","to-prev","is-switching");
+    visual.classList.add(direction > 0 ? "to-next" : "to-prev","is-switching");
+    const distance = direction > 0 ? 7 : -7;
+    const runTransition = () => {
+      const outgoingAnimation = current.animate([
+        {opacity:1,transform:"translate3d(0,0,0) scale(1)",filter:"blur(0)",clipPath:"inset(0 0 0 0)"},
+        {opacity:.72,offset:.42},
+        {opacity:0,transform:`translate3d(${-distance}vw,0,0) scale(.93)`,filter:"blur(11px)",clipPath: direction > 0 ? "inset(0 100% 0 0)" : "inset(0 0 0 100%)"}
+      ],{duration:760,easing:"cubic-bezier(.65,0,.2,1)",fill:"forwards"});
+      const incomingAnimation = incoming.animate([
+        {opacity:0,transform:`translate3d(${distance}vw,0,0) scale(1.1)`,filter:"blur(15px)",clipPath: direction > 0 ? "inset(0 0 0 100%)" : "inset(0 100% 0 0)"},
+        {opacity:.18,offset:.18},
+        {opacity:1,transform:"translate3d(0,0,0) scale(1)",filter:"blur(0)",clipPath:"inset(0 0 0 0)"}
+      ],{duration:880,easing:"cubic-bezier(.18,.75,.18,1)",fill:"forwards"});
+      Promise.all([outgoingAnimation.finished,incomingAnimation.finished]).then(() => {
+        currentLightboxIndex = nextIndex;
+        current.src = incoming.src;
+        current.alt = incoming.alt;
+        current.getAnimations().forEach((animation) => animation.cancel());
+        incoming.getAnimations().forEach((animation) => animation.cancel());
+        incoming.removeAttribute("src");
+        visual.classList.remove("to-next","to-prev","is-switching");
+        updateLightbox();
+        lightboxAnimating = false;
+      }).catch(() => { lightboxAnimating = false; });
+    };
+    const decoded = incoming.decode ? incoming.decode() : Promise.resolve();
+    decoded.catch(() => {}).then(runTransition);
   }
 
   function closeLightbox() {
+    document.querySelectorAll("#lightbox .lightbox-image").forEach((image) => image.getAnimations().forEach((animation) => animation.cancel()));
+    document.querySelector("#lightbox .lightbox-visual")?.classList.remove("to-next","to-prev","is-switching");
+    lightboxAnimating = false;
     document.querySelector("#lightbox")?.classList.remove("open");
     document.body.classList.remove("lightbox-open");
     lastFocused?.focus();
@@ -492,6 +585,7 @@
   if (path === "/") renderLanding();
   else if (path === "/works") renderHome();
   else if (path === "/selected") renderSelected();
+  else if (path === "/dji") renderDji();
   else if (path === "/design") renderDesign();
   else if (path === "/series") renderSeriesIndex();
   else if (path.startsWith("/series/")) {
