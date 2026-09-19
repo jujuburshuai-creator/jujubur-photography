@@ -187,9 +187,8 @@ img { display: block; width: 100%; height: auto; }
 .dji-shot { margin: 0 0 clamp(1.5rem,2.8vw,2.8rem); break-inside: avoid; }
 .dji-shot .photo-button { position: relative; overflow: hidden; }
 .dji-shot img { transition: transform .85s var(--ease),filter .55s ease; }
-.dji-shot-hover { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: space-between; padding: 1.1rem; background: linear-gradient(transparent 42%,rgba(2,5,8,.76)); opacity: 0; transition: opacity .4s ease; }
-.dji-shot-hover i,.dji-shot-hover b { font-style: normal; font-size: .68rem; font-weight: 400; letter-spacing: .13em; }
-.dji-shot-hover i { color: #c7ff39; }
+.dji-shot-hover { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: flex-end; padding: 1.1rem; background: linear-gradient(transparent 42%,rgba(2,5,8,.76)); opacity: 0; transition: opacity .4s ease; }
+.dji-shot-hover b { font-size: .68rem; font-weight: 400; letter-spacing: .13em; }
 .dji-shot:hover img,.dji-shot:focus-within img { transform: scale(1.035); filter: saturate(1.08); }
 .dji-shot:hover .dji-shot-hover,.dji-shot:focus-within .dji-shot-hover { opacity: 1; }
 .dji-shot figcaption { display: flex; justify-content: space-between; gap: 1rem; padding-top: .7rem; border-top: 1px solid rgba(255,255,255,.18); color: #8a8e90; font-size: .7rem; letter-spacing: .06em; }

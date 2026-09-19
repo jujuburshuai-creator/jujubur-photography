@@ -71,13 +71,13 @@
       ]
     }
   ];
-  const djiPhotoIds = ["f001","p008","p036","p017","p011","p021","f009","p028","p012","p029","p050"];
+  const djiPhotoIds = ["dji001","dji002","dji003","dji004","dji005","dji006","dji007","dji008","dji009","dji010","dji011","dji012","dji013","dji014","dji015","dji016"];
   const seriesEntries = [
     {
       number: "01",
       title: "大疆专题｜天空之城",
       intro: "从空中观看城市、山河与季节，让熟悉的地面显现出新的秩序。",
-      cover: "f001",
+      cover: "dji001",
       href: "/dji/"
     },
     ...data.series.map((series, index) => ({
@@ -353,11 +353,11 @@
             <div><span>FLIGHT LOG / 001—${String(items.length).padStart(3,"0")}</span><h2 id="aerial-gallery-title">航拍作品</h2></div>
             <p>俯瞰城市肌理与自然边界<br>点击图片可全屏浏览 · 支持方向键与滑动切换</p>
           </header>
-          <div class="dji-waterfall">${items.map((photo, index) => `
+          <div class="dji-waterfall">${items.map((photo) => `
             <figure class="dji-shot reveal">
               <button class="photo-button js-photo" data-photo-id="${photo.id}" aria-label="查看航拍作品：${alt(photo)}">
                 ${picture(photo)}
-                <span class="dji-shot-hover"><i>${String(index + 1).padStart(2,"0")}</i><b>展开视野 ↗</b></span>
+                <span class="dji-shot-hover"><b>展开视野 ↗</b></span>
               </button>
               <figcaption><span>${photo.title}</span><span>${photo.location}</span></figcaption>
             </figure>`).join("")}</div>

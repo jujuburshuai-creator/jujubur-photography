@@ -72,6 +72,22 @@ window.PORTFOLIO_DATA = {
     {id:"f012",title:"Sewu 瀑布",location:"印度尼西亚·东爪哇",w:5464,h:3640,series:["land","human"],featured:12,selected:20},
     {id:"f013",title:"战斗机银河",location:"安徽·滁州",w:7404,h:4875,series:["land","human"],featured:13,selected:21},
     {id:"f014",title:"尼斯海边",location:"法国·尼斯",w:4672,h:7008,series:["land","human","seasons"],featured:14,selected:22},
-    {id:"f015",title:"墨尔本天际线",location:"澳大利亚·墨尔本",w:6943,h:4629,series:["city","human"],featured:15,selected:23}
+    {id:"f015",title:"墨尔本天际线",location:"澳大利亚·墨尔本",w:6943,h:4629,series:["city","human"],featured:15,selected:23},
+    {id:"dji001",title:"Bromo 火山口",location:"印度尼西亚·东爪哇",w:4912,h:6465,series:[]},
+    {id:"dji002",title:"九曲桥雪",location:"东南大学·九龙湖",w:5425,h:3541,series:[]},
+    {id:"dji003",title:"九曲桥雪 II",location:"东南大学·九龙湖",w:2431,h:3640,series:[]},
+    {id:"dji004",title:"白天堂沙滩 II",location:"澳大利亚",w:2047,h:2703,series:[]},
+    {id:"dji005",title:"石城",location:"江西·婺源",w:2047,h:2929,series:[]},
+    {id:"dji006",title:"涌泉池",location:"东南大学·四牌楼",w:5435,h:3248,series:[]},
+    {id:"dji007",title:"梧桐大道",location:"东南大学·四牌楼",w:5367,h:3575,series:[]},
+    {id:"dji008",title:"九龙湖晚霞",location:"东南大学·九龙湖",w:5464,h:3640,series:[]},
+    {id:"dji009",title:"喀纳斯雪景",location:"新疆·喀纳斯",w:5464,h:3640,series:[]},
+    {id:"dji010",title:"Sewu 瀑布",location:"印度尼西亚·东爪哇",w:5464,h:3640,series:[]},
+    {id:"dji011",title:"破碎沙滩",location:"印度尼西亚·佩妮达岛",w:9448,h:6328,series:[]},
+    {id:"dji012",title:"白天堂沙滩",location:"澳大利亚",w:2654,h:1600,series:[]},
+    {id:"dji013",title:"佩妮达岛",location:"印度尼西亚",w:2744,h:3640,series:[]},
+    {id:"dji014",title:"三清山日落",location:"江西·三清山",w:2609,h:3640,series:[]},
+    {id:"dji015",title:"岳阳楼",location:"湖南·岳阳",w:5464,h:3640,series:[]},
+    {id:"dji016",title:"九龙湖晚霞 II",location:"东南大学·九龙湖",w:5464,h:3640,series:[]}
   ]
 };
