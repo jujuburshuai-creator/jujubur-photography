@@ -119,21 +119,6 @@ img { display: block; width: 100%; height: auto; }
 .series-row .arrow { font-size: 1.4rem; transition: transform .35s var(--ease); }
 .series-row:hover .arrow { transform: translateX(.45rem); }
 .series-row:hover .series-preview img { transform: scale(1.015); opacity: .58; }
-.dji-feature { padding: clamp(1.25rem,4vw,4.5rem); background: #080a0d; }
-.dji-feature-link { position: relative; min-height: min(78vh,880px); display: block; overflow: hidden; isolation: isolate; border: 1px solid rgba(255,255,255,.18); }
-.dji-feature-media,.dji-feature-media picture,.dji-feature-scrim { position: absolute; inset: 0; width: 100%; height: 100%; }
-.dji-feature-media { z-index: -2; }
-.dji-feature-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s cubic-bezier(.18,.7,.18,1),filter .7s ease; }
-.dji-feature-scrim { z-index: -1; background: linear-gradient(90deg,rgba(3,6,10,.84),rgba(3,6,10,.2) 68%),linear-gradient(0deg,rgba(2,4,7,.76),transparent 62%); }
-.dji-feature-top { position: absolute; inset: 2rem 2.2rem auto; display: flex; justify-content: space-between; color: rgba(255,255,255,.68); font-size: .7rem; letter-spacing: .18em; }
-.dji-feature-copy { position: absolute; left: clamp(1.5rem,5vw,5rem); bottom: clamp(2rem,7vw,6.5rem); }
-.dji-feature-kicker { color: #c7ff39; font-size: .78rem; letter-spacing: .2em; }
-.dji-feature-copy h2 { margin: .55rem 0 1rem; font-family: "Songti SC",serif; font-size: clamp(4rem,10vw,11rem); line-height: .82; font-weight: 400; letter-spacing: -.06em; }
-.dji-feature-copy p { max-width: 33rem; margin: 0; color: rgba(255,255,255,.74); font-size: clamp(.95rem,1.4vw,1.2rem); }
-.dji-feature-enter { position: absolute; right: clamp(1.5rem,4vw,4rem); bottom: clamp(2rem,4vw,4rem); width: 9rem; height: 9rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .6rem; border: 1px solid rgba(255,255,255,.58); border-radius: 50%; font-size: .78rem; letter-spacing: .12em; transition: color .45s ease,background .45s ease,transform .45s var(--ease); }
-.dji-feature-enter i { font-size: 1.35rem; font-style: normal; }
-.dji-feature-link:hover .dji-feature-media img,.dji-feature-link:focus-visible .dji-feature-media img { transform: scale(1.045); filter: saturate(1.08); }
-.dji-feature-link:hover .dji-feature-enter,.dji-feature-link:focus-visible .dji-feature-enter { background: #fff; color: #090b0e; transform: rotate(5deg); }
 .home-selected { min-height: 88vh; display: grid; grid-template-columns: .9fr 1.1fr; gap: 8vw; align-items: center; padding: clamp(6rem,10vw,11rem) clamp(1.25rem,7vw,9rem); }
 .home-selected-image { transform: translateY(5%); }
 .home-selected-copy .eyebrow { font-size: .72rem; letter-spacing: .16em; color: var(--muted); }
@@ -198,7 +183,7 @@ img { display: block; width: 100%; height: auto; }
 .dji-gallery-head span { color: #c7ff39; font-size: .68rem; letter-spacing: .18em; }
 .dji-gallery-head h2 { margin: .8rem 0 0; font-family: "Songti SC",serif; font-size: clamp(2.8rem,6vw,6.5rem); line-height: 1; font-weight: 400; }
 .dji-gallery-head p { margin: 0; color: #858a8c; text-align: right; font-size: .8rem; line-height: 1.9; letter-spacing: .05em; }
-.dji-waterfall { columns: 3; column-gap: clamp(1rem,2vw,2rem); }
+.dji-waterfall { columns: 2; column-gap: clamp(1rem,2.8vw,3rem); }
 .dji-shot { margin: 0 0 clamp(1.5rem,2.8vw,2.8rem); break-inside: avoid; }
 .dji-shot .photo-button { position: relative; overflow: hidden; }
 .dji-shot img { transition: transform .85s var(--ease),filter .55s ease; }
@@ -289,11 +274,6 @@ body.design-modal-open { overflow: hidden; }
 .lightbox-image { grid-area: 1 / 1; width: auto; max-width: 100%; height: auto; max-height: calc(100vh - 160px); margin: auto; object-fit: contain; will-change: transform,opacity,filter,clip-path; }
 .lightbox-image.current { z-index: 1; }
 .lightbox-image.incoming { z-index: 2; opacity: 0; }
-.lightbox-scan { position: absolute; z-index: 4; inset: 0 auto 0 50%; width: 1px; background: linear-gradient(transparent,rgba(199,255,57,.85) 25%,#fff 50%,rgba(199,255,57,.85) 75%,transparent); box-shadow: 0 0 32px rgba(199,255,57,.7); opacity: 0; pointer-events: none; }
-.lightbox-visual.is-switching .lightbox-scan { animation: lightbox-scan-next .88s cubic-bezier(.5,0,.2,1); }
-.lightbox-visual.is-switching.to-prev .lightbox-scan { animation-name: lightbox-scan-prev; }
-@keyframes lightbox-scan-next { 0% { left: 12%; opacity: 0; } 18%,75% { opacity: 1; } 100% { left: 88%; opacity: 0; } }
-@keyframes lightbox-scan-prev { 0% { left: 88%; opacity: 0; } 18%,75% { opacity: 1; } 100% { left: 12%; opacity: 0; } }
 .lightbox-nav { height: 100%; font-size: 1.6rem; overflow: hidden; }
 .lightbox-nav span { display: block; transition: transform .35s var(--ease); }
 .lightbox-nav:hover span,.lightbox-nav:focus-visible span { transform: scale(1.3); color: #c7ff39; }
@@ -345,13 +325,6 @@ body.design-modal-open { overflow: hidden; }
   .series-row { min-height: 180px; }
   .series-row-content { grid-template-columns: 2.2rem 1fr auto; gap: 1rem; padding: 1.4rem; }
   .series-row p { display: none; }
-  .dji-feature-link { min-height: 72svh; }
-  .dji-feature-top { inset: 1rem 1rem auto; }
-  .dji-feature-top span:last-child { display: none; }
-  .dji-feature-copy { left: 1rem; right: 1rem; bottom: 6.5rem; }
-  .dji-feature-copy h2 { font-size: clamp(3.7rem,19vw,6rem); }
-  .dji-feature-copy p { font-size: .86rem; }
-  .dji-feature-enter { left: 1rem; right: auto; bottom: 1.1rem; width: auto; height: auto; flex-direction: row; justify-content: flex-start; padding: .7rem 1rem; border-radius: 99px; }
   .home-selected { grid-template-columns: 1fr; gap: 4rem; }
   .home-selected-image { width: 82%; margin-left: auto; order: 2; }
   .page-intro h1 { font-size: clamp(3.2rem,17vw,6.5rem); }
@@ -402,8 +375,7 @@ body.design-modal-open { overflow: hidden; }
   .design-scroll span { animation: none; }
   .design-card-preview img { transition: none; }
   .dji-hero-media,.dji-horizon i,.dji-descend i { animation: none; }
-  .dji-feature-media img,.dji-shot img { transition: none; }
-  .lightbox-visual.is-switching .lightbox-scan { animation: none; }
+  .dji-shot img { transition: none; }
   #app { animation: none; }
   body.page-leaving #app { opacity: 1; transform: none; transition: none; }
 }

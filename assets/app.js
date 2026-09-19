@@ -72,6 +72,20 @@
     }
   ];
   const djiPhotoIds = ["f001","p008","p036","p017","p011","p021","f009","p028","p012","p029","p050"];
+  const seriesEntries = [
+    {
+      number: "01",
+      title: "大疆专题｜天空之城",
+      intro: "从空中观看城市、山河与季节，让熟悉的地面显现出新的秩序。",
+      cover: "f001",
+      href: "/dji/"
+    },
+    ...data.series.map((series, index) => ({
+      ...series,
+      number: String(index + 2).padStart(2, "0"),
+      href: `/series/${series.slug}/`
+    }))
+  ];
 
   const src = (photo, size = "full") => `/assets/${size}/${photo.id}.webp`;
   const alt = (photo) => `${photo.location}，${photo.title}`;
@@ -254,24 +268,11 @@
       </main>
       <section class="home-series" aria-labelledby="series-title">
         <div class="section-heading"><h2 id="series-title">Series</h2><span>专题 / 06</span></div>
-        <div class="series-list">${data.series.map((series) => `
-          <a class="series-row" href="/series/${series.slug}/">
+        <div class="series-list">${seriesEntries.map((series) => `
+          <a class="series-row" href="${series.href}">
             <div class="series-preview">${picture(byId[series.cover])}</div>
             <div class="series-row-content"><span class="number">${series.number}</span><h3>${series.title}</h3><p>${series.intro}</p><span class="arrow" aria-hidden="true">→</span></div>
           </a>`).join("")}</div>
-      </section>
-      <section class="dji-feature reveal" aria-labelledby="dji-feature-title">
-        <a class="dji-feature-link" href="/dji/">
-          <div class="dji-feature-media">${picture(byId.f001)}</div>
-          <div class="dji-feature-scrim" aria-hidden="true"></div>
-          <div class="dji-feature-top"><span>06 / AERIAL SERIES</span><span>DJI · SKY CITY</span></div>
-          <div class="dji-feature-copy">
-            <span class="dji-feature-kicker">大疆专题</span>
-            <h2 id="dji-feature-title">天空之城</h2>
-            <p>越过地平线，从另一种高度观看城市、山河与季节。</p>
-          </div>
-          <span class="dji-feature-enter">进入专题 <i aria-hidden="true">↗</i></span>
-        </a>
       </section>
       <section class="home-selected reveal">
         <div class="home-selected-image">${picture(byId.p041)}</div>
@@ -284,10 +285,10 @@
     document.title = "专题 — JUJUBUR / PHOTOGRAPHY";
     app.innerHTML = `${header(false, "series")}
       <main id="main" class="page-main">
-        <header class="page-intro"><span class="page-kicker">PHOTOGRAPHIC SERIES / 05</span><h1>专题</h1></header>
-        <div class="series-index">${data.series.map((series) => {
+        <header class="page-intro"><span class="page-kicker">PHOTOGRAPHIC SERIES / 06</span><h1>专题</h1></header>
+        <div class="series-index">${seriesEntries.map((series) => {
           const cover = byId[series.cover];
-          return `<a class="series-card reveal" href="/series/${series.slug}/">
+          return `<a class="series-card reveal" href="${series.href}">
             <span class="number">${series.number}</span>
             <div><h2>${series.title}</h2><p>${series.intro}</p></div>
             ${picture(cover)}
@@ -306,7 +307,7 @@
     app.innerHTML = `${header(false, "series")}
       <main id="main" class="page-main">
         <header class="series-hero">
-          <div class="series-titleline"><span class="number">${series.number}</span><h1>${series.title}</h1><p>${series.intro}</p></div>
+          <div class="series-titleline"><span class="number">${String(index + 2).padStart(2, "0")}</span><h1>${series.title}</h1><p>${series.intro}</p></div>
         </header>
         <div class="series-gallery">${items.map((photo) => `
           <figure class="series-photo${photo.h > photo.w ? " portrait" : ""} reveal">
@@ -440,7 +441,7 @@
     if (document.querySelector("#lightbox")) return;
     document.body.insertAdjacentHTML("beforeend", `<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="照片查看器">
       <div class="lightbox-top"><span class="lightbox-count"></span><button class="lightbox-close" type="button" aria-label="关闭">×</button></div>
-      <div class="lightbox-stage"><button class="lightbox-nav prev" type="button" aria-label="上一张"><span>←</span></button><div class="lightbox-visual"><img class="lightbox-image current" alt=""><img class="lightbox-image incoming" alt="" aria-hidden="true"><i class="lightbox-scan" aria-hidden="true"></i></div><button class="lightbox-nav next" type="button" aria-label="下一张"><span>→</span></button></div>
+      <div class="lightbox-stage"><button class="lightbox-nav prev" type="button" aria-label="上一张"><span>←</span></button><div class="lightbox-visual"><img class="lightbox-image current" alt=""><img class="lightbox-image incoming" alt="" aria-hidden="true"></div><button class="lightbox-nav next" type="button" aria-label="下一张"><span>→</span></button></div>
       <div class="lightbox-meta"><span><b>作品</b><i class="lightbox-title"></i></span><span><b>拍摄地</b><i class="lightbox-location"></i></span><span><b>原始尺寸</b><i class="lightbox-size"></i></span></div>
     </div>`);
     const lightbox = document.querySelector("#lightbox");
